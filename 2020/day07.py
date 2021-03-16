@@ -22,8 +22,6 @@ def format_rules(rules_content):
 rules = format_rules(read_from_file('inputs/day07.input').split("\n"))
     
 def solve1():
-    global rules
-
     final = []
     queue = ["shiny gold"]
 
@@ -50,7 +48,6 @@ def num_inner(rules, colour):
             return sum([bag[0] * (num_inner(rules, bag[1]) + 1) for bag in rule[1]])
 
 def solve2():
-    global rules
     return num_inner(rules, 'shiny gold')
 
 print("Pt1:", solve1())
