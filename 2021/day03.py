@@ -44,5 +44,5 @@ def solve2():
 	return int(oxylist[0], 2) * int(c02list[0], 2)
 
 	    
-# print("Pt1:", solve1())
+print("Pt1:", solve1())
 print("Pt2:", solve2())
