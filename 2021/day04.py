@@ -6,7 +6,7 @@ def read_from_file(file_name):
     _file.close()
     return _read
 
-puzzle_input = read_from_file('inputs/day04_simple.txt')
+puzzle_input = read_from_file('inputs/day04.txt')
 
 order = [int(x) for x in puzzle_input[0].split(',')]
 called = []
@@ -32,7 +32,7 @@ def solve1():
 						break
 				else:
 					continue
-			pass
+			return sum([sum([x for x in row if x not in called]) for row in board]) * call
 
 def solve2():
 	pass
