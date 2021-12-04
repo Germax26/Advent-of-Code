@@ -1,4 +1,4 @@
-# Dive !
+# Dive!
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
