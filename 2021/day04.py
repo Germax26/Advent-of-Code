@@ -14,7 +14,25 @@ called = []
 boards = [[[int(y) for y in x.split()] for x in puzzle_input[n:n+5]] for n in range(1, len(puzzle_input), 5)]
 
 def solve1():
-	pass
+	for call in order:
+		called.append(call)
+		for board in boards:
+			for row in board:
+				for number in row:
+					if number not in called:
+						break
+				else:
+					break
+			else:
+				for i in range(5):
+					for row in board:
+						if row[i] not in called:
+							break
+					else:
+						break
+				else:
+					continue
+			pass
 
 def solve2():
 	pass
