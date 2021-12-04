@@ -16,10 +16,13 @@ boards = [[[int(y) for y in x.split()] for x in puzzle_input[n:n+5]] for n in ra
 def score(call, board):
 	return sum([sum([x for x in row if x not in called]) for row in board]) * call
 
-def solve1():
+def play_bingo(winner_callback, board_filter):
+	while called: called.pop()
 	for call in order:
 		called.append(call)
-		for board in boards:
+		for j, board in enumerate(boards):
+			if not board_filter(j):
+				continue
 			for row in board:
 				for number in row:
 					if number not in called:
@@ -35,35 +38,24 @@ def solve1():
 						break
 				else:
 					continue
-			return score(call, board)
+			
+			result = winner_callback(call, board, j)
+			if result != None:
+				return result
+				
+def solve1():
+	return play_bingo(lambda call, board, _: score(call, board), lambda i: True)
 
 def solve2():
-	while called: called.pop()
 	left = set(range(len(boards)))
-	for call in order:
-		called.append(call)
-		for i, board in enumerate(boards):
-			if i not in left:
-				continue
-			for row in board:
-				for number in row:
-					if number not in called:
-						break
-				else:
-					break
-			else:
-				for j in range(5):
-					for row in board:
-						if row[j] not in called:
-							break
-					else:
-						break
-				else:
-					continue
-			if len(left) > 1:
-				left.remove(i)
-			else:
-				return score(call, board)
-	    
+
+	def find_last(call, board, i):
+		if len(left) > 1:
+			left.remove(i)
+		else:
+			return score(call, board)
+
+	return play_bingo(find_last, lambda i: i in left)
+
 print("Pt1:", solve1())
 print("Pt2:", solve2())
