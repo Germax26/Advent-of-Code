@@ -25,5 +25,24 @@ def solve1():
 
 	return position * depth
 
+def solve2():
+	position = 0
+	depth = 0
+	aim = 0
+	for instruction in puzzle_input:
+		cmd, val = instruction.split()
+		val = int(val)
+		if cmd == "forward":
+			position += val
+			depth += aim * val
+		elif cmd == "down":
+			aim += val
+		elif cmd == "up":
+			aim -= val
+		else:
+			raise Exception(f"Unknown command: {cmd}.")
+
+	return position * depth
+
 print("Pt1:", solve1())
-# print("Pt2:", solve2())
+print("Pt2:", solve2())
