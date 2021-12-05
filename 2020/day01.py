@@ -2,9 +2,11 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = [int(n) for n in _file.read().split('\n')]
     _file.close()
     return _read
+
+puzzle_input = sorted(read_from_file("inputs/day01.txt"))
 
 def k_sum(nums, target, k): # O(n^k-1)
     if k == 1:
@@ -32,10 +34,9 @@ def k_sum(nums, target, k): # O(n^k-1)
     return [-1] * k
 
 def solve1(k=2):
-    nums = sorted([int(n) for n in read_from_file("inputs/day01.input").split("\n")])
     total = 1
-    for i in k_sum(nums, 2020, k):
-        total *= nums[i]
+    for i in k_sum(puzzle_input, 2020, k):
+        total *= puzzle_input[i]
     return total
 
 def solve2():

@@ -30,28 +30,26 @@ def result(code):
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split('\n')
     _file.close()
     return _read
 
-code = read_from_file("inputs/day08.input").split("\n")
+puzzle_input = read_from_file("inputs/day08.txt")
     
 def solve1():
-    global code
-
-    return result(code)[0]
+    return result(puzzle_input)[0]
 
 def solve2():
-    global code
+    global puzzle_input
 
     for replacement in [["nop", "jmp"], ["jmp", "nop"]]:
-            for i in range(0, len(code)):
-                if code[i][:3] == replacement[0]:
-                    code[i] = replacement[1] + code[i][3:]
-                    if (_result:=result(code))[1]:
+            for i in range(0, len(puzzle_input)):
+                if puzzle_input[i][:3] == replacement[0]:
+                    puzzle_input[i] = replacement[1] + puzzle_input[i][3:]
+                    if (_result:=result(puzzle_input))[1]:
                         return _result[0]
                     else:
-                        code = read_from_file("inputs/day08.input").split("\n")
+                        puzzle_input = read_from_file("inputs/day08.txt")
 
 print("Pt1:", solve1())
 print("Pt2:", solve2())

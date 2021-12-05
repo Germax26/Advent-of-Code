@@ -4,7 +4,7 @@ import re
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split("\n")
     _file.close()
     return _read
 
@@ -19,7 +19,7 @@ def format_rules(rules_content):
         rules.append([srule[0], second_arg])
     return rules
 
-rules = format_rules(read_from_file('inputs/day07.input').split("\n"))
+rules = format_rules(read_from_file('inputs/day07.txt'))
     
 def solve1():
     final = []

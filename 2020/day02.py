@@ -2,14 +2,15 @@
 
 def read_from_file(file_name):
     _file = open(file_name, "r")
-    _read = _file.read()
+    _read = _file.read().split("\n")
     _file.close()
     return _read
 
+puzzle_input = read_from_file("inputs/day02.txt")
+
 def solve1():
-    pwds = read_from_file("inputs/day02.input").split("\n")
     i = 0
-    for pwd in pwds:
+    for pwd in puzzle_input:
         spwd = pwd.split(": ")
         policy = spwd[0]
         password = spwd[1]
@@ -34,9 +35,8 @@ def xor(a, b):
         return b
 
 def solve2():
-    pwds = read_from_file("inputs/day02.input").split("\n")
     i = 0
-    for pwd in pwds:
+    for pwd in puzzle_input:
         spwd = pwd.split(": ")
         policy = spwd[0]
         password = spwd[1]

@@ -2,16 +2,17 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split("\n")
     _file.close()
     return _read
 
+puzzle_input = read_from_file("inputs/day05.txt")
+
 def solve1(final=lambda possible, highest, lowest: highest):
-    seats = read_from_file("inputs/day05.input").split("\n")
     possible = [[True, i] for i in range(0, 1024)]
     lowest = len(possible)
     highest = 0
-    for seat in seats:
+    for seat in puzzle_input:
         val = ""
         for i in list(seat):
             if i == "F" or i == "L":

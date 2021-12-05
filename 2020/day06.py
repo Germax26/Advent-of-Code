@@ -2,15 +2,15 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split("\n\n")
     _file.close()
     return _read
 
-def solve(f):
-    groups = read_from_file("inputs/day06.input").split("\n\n")
+puzzle_input = read_from_file("inputs/day06.txt")
 
+def solve(f):
     total = 0
-    for group in groups:
+    for group in puzzle_input:
         num_people = len(group.split("\n"))
         num_questions = 0
         for l in [chr(x) for x in range(97, 123)]:

@@ -4,19 +4,16 @@ import re
 
 def read_from_file(file_name):
     _file = open(file_name, "r")
-    _read = _file.read()
+    _read = _file.read().split("\n\n")
     _file.close()
     return _read
 
 valid_keys = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
-passports = read_from_file("inputs/day04.input").split("\n\n")
+puzzle_input = read_from_file("inputs/day04.txt")
 
 def solve1():
-    global valid_keys
-    global passports
-
     num_valid = 0
-    for passport in passports:
+    for passport in puzzle_input:
         spassport = re.split('\s', passport)
         num_keys = 0
         for i in spassport:
@@ -28,11 +25,8 @@ def solve1():
     return num_valid
 
 def solve2():
-    global valid_keys
-    global passports
-
     num_valid = 0
-    for passport in passports:
+    for passport in puzzle_input:
         spassport = re.split('\s', passport)
         num_keys = 0
         for i in spassport:
