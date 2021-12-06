@@ -1,7 +1,5 @@
 # Hydrothermal Venture
 
-import math
-
 def sign(x):
 	'''
 	I really hate the fact that python doesn't have its own sign() function.
