@@ -2,12 +2,12 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split('\n')
     _file.close()
     return _read
 
-puzzle_input = read_from_file("inputs/day11.input")
-grid = [list(i) for i in puzzle_input.split("\n")]
+puzzle_input = read_from_file("inputs/day11.txt")
+grid = [list(i) for i in puzzle_input]
 prev_grid = [[i for i in j] for j in grid]
 
 def num_neighbors(grid, row, col, tolerance, part):
@@ -73,10 +73,9 @@ def solve1(part=1, tolerance=4):
         prev_grid = grid
 
 def solve2():
-    #return
     global grid
     global prev_grid
-    grid = [list(i) for i in puzzle_input.split("\n")]
+    grid = [list(i) for i in puzzle_input]
     prev_grid = [[i for i in j] for j in grid]
     return solve1(2, 5)
 

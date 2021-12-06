@@ -2,10 +2,9 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split('\n')
     _file.close()
     return _read
-
 
 dir = "E"
 left = {
@@ -26,12 +25,12 @@ y = 0
 wx = 10
 wy = 1
 
-puzzle_input = read_from_file("inputs/day12.input").split("\n")
+puzzle_input = read_from_file("inputs/day12.txt")
 
 def solve1():
     global x
     global y
-    global puzzle_input
+    # global puzzle_input
     global left
     global dir
     global right
@@ -80,7 +79,7 @@ def solve2():
     global y
     global wx
     global wy
-    global puzzle_input
+    # global puzzle_input
     for instruction in puzzle_input:
         action = instruction[:1]
         value = int(instruction[1:])

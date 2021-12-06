@@ -2,21 +2,20 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = [int(x) for x in _file.read().split(',')]
     _file.close()
     return _read
 
-nums = [int(i) for i in read_from_file("inputs/day15.input").split(",")]
+puzzle_input = read_from_file("inputs/day15.txt")
 
 def solve1(n=2020):
-    global nums
     last_spoken = {}
     prev_num = None
     turn = 1
     while True:
         spoken_num = None
-        if turn <= len(nums):
-            spoken_num = nums[turn - 1]
+        if turn <= len(puzzle_input):
+            spoken_num = puzzle_input[turn - 1]
         else:
             last_spoken_prev = last_spoken[prev_num]
             if len(last_spoken_prev) == 1:

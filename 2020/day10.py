@@ -2,12 +2,12 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split("\n")
     _file.close()
     return _read
 
-
-nums = sorted([int(n) for n in read_from_file("inputs/day10.input").split("\n")])
+puzzle_input = read_from_file("inputs/day10.txt")
+nums = sorted(puzzle_input)
 
 def solve1():
     snums = [0] + nums

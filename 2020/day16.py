@@ -2,22 +2,19 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split("\n")
     _file.close()
     return _read
 
-puzzle_input = read_from_file('inputs/day16.input').split("\n")
+puzzle_input = read_from_file('inputs/day16.txt')
 pzi = [[], []]
 rules = []
 tickets = []
 possible = []
 
 def parse(f):
-    global pzi
-    global puzzle_input
     global rules
     global tickets
-    global possible
     
     n = 0
     for i in f:
@@ -42,12 +39,9 @@ def parse(f):
     rules.remove([''])
     
     for i in range(0, len(tickets[0])):
-        possible.append(set([rule[0] for rule in rules]))\
+        possible.append(set([rule[0] for rule in rules]))
 
 def solve1():
-    global rules
-    global tickets
-    global possible
     error_rate = 0
     for ticket in tickets[1:]:
         position = 0
@@ -64,10 +58,6 @@ def solve1():
     return error_rate
 
 def solve2():
-    global rules
-    global tickets
-    global possible
-
     queue = []
     completed = []
 

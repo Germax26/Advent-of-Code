@@ -2,11 +2,11 @@
 
 def read_from_file(file_name):
     _file = open(file_name, 'r')
-    _read = _file.read()
+    _read = _file.read().split("\n")
     _file.close()
     return _read
 
-puzzle_input = read_from_file("inputs/day13.input").split("\n")
+puzzle_input = read_from_file("inputs/day13.txt")
 
 earliest_time = int(puzzle_input[0])
 bus_ids = puzzle_input[1].split(",")
