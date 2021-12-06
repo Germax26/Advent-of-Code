@@ -12,7 +12,7 @@ puzzle_input = read_from_file("inputs/day06.txt")
 
 def solve1(days=80):
 	fish = deque([puzzle_input.count(x) for x in range(10)])
-	for _ in range(days):
+	for day in range(days):
 		zeros = fish.popleft()
 		fish[6] += zeros
 		fish[8] += zeros
