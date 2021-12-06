@@ -10,15 +10,17 @@ def read_from_file(file_name):
 
 puzzle_input = read_from_file("inputs/day06.txt")
 
-def solve1():
+def solve1(days=80):
 	fish = deque([puzzle_input.count(x) for x in range(10)])
-	for day in range(80):
+	for day in range(days):
 		zeros = fish.popleft()
 		fish[6] += zeros
 		fish[8] += zeros
 		fish.append(0)
 	return sum(fish)
 
+def solve2():
+	return solve1(days=256)
 
 print("Pt1:", solve1())
-# print("Pt2:", solve2())
+print("Pt2:", solve2())
