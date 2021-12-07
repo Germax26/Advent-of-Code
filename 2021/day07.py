@@ -25,7 +25,7 @@ def solve2():
 	diff = -1
 
 	while diff < 0:
-		diff = sum([crabs[i] * (position - i + (i <= position)) for i in range(max_crabs)])
+		diff = sum([x * (position - i + (i <= position)) for i, x in enumerate(crabs)])
 		fuel += diff
 		position += 1
 
