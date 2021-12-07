@@ -17,7 +17,21 @@ def solve1():
 	return total
 
 def solve2():
-	pass
+	max_crabs = max(puzzle_input) + 1
+	crabs = [puzzle_input.count(x) for x in range(max_crabs)]
+	fuel = sum([x * int(i * (i+1) / 2) for i, x in enumerate(crabs)])
+	position = 0
+
+	diff = -1
+
+	while diff < 0:
+		diff = sum([crabs[i] * (position - i + (i <= position)) for i in range(max_crabs)])
+		fuel += diff
+		position += 1
+
+	fuel -= diff
+
+	return fuel
 
 print("Pt1:", solve1())
-# print("Pt2:", solve2())
+print("Pt2:", solve2())
