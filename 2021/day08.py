@@ -65,7 +65,7 @@ def solve2():
 
 		for number in rest:
 			converted = sorted(map(lambda x: connections[x], number))
-			output += str(([x[0] for x in numbers.items() if x[1] == converted][0]))
+			output += str([x[0] for x in numbers.items() if x[1] == converted][0])
 
 		total += int(output)
 
