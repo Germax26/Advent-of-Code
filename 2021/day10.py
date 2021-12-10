@@ -29,10 +29,10 @@ points = {
 	'>': 4
 }
 
-def parse_chunk(tokens, depth=0):
+def parse_chunk(tokens):
 	token = tokens.pop()
 	while tokens and tokens[-1] in brackets:
-		err = parse_chunk(tokens, depth+1)
+		err = parse_chunk(tokens)
 		if err: 
 			if err[:4] == 'inc:':
 				return err + brackets[token]
@@ -42,7 +42,7 @@ def parse_chunk(tokens, depth=0):
 		if closing != brackets[token]:
 			return 'cor:' + closing # corrupted
 	else:
-		return 'inc:' + brackets[token]  # incomplete
+		return 'inc:' + brackets[token] # incomplete
 
 def solve():
 	total1 = 0
