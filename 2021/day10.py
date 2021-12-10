@@ -8,51 +8,76 @@ def read_from_file(file_name):
 
 puzzle_input = read_from_file("inputs/day10.txt")
 
-def solve1():
-	brackets = {
-			'(': ')',
-			'[': ']',
-			'{': '}',
-			'<': '>'
-		}
+brackets = {
+	'(': ')',
+	'[': ']',
+	'{': '}',
+	'<': '>'
+}
 
-	score = {
-		')': 3,
-		']': 57,
-		'}': 1197,
-		'>': 25137
-	}
+scores = {
+	')': 3,
+	']': 57,
+	'}': 1197,
+	'>': 25137
+}
 
-	def parse_chunk(tokens):
-			token = tokens.pop()
-			if token in brackets:
-				while tokens and tokens[-1] in brackets:
-					err = parse_chunk(tokens)
-					if err: return err
-				if tokens:
-					closing = tokens.pop()
-					if closing != brackets[token]:
-						return closing
-				else:
-					return 'incomplete'
-			else:
-				return 'unmatched' # never reached in given input?
+points = {
+	')': 1,
+	']': 2,
+	'}': 3,
+	'>': 4
+}
 
-	total = 0
+def parse_chunk(tokens, depth=0):
+	token = tokens.pop()
+	while tokens and tokens[-1] in brackets:
+		err = parse_chunk(tokens, depth+1)
+		if err: 
+			if err[:4] == 'inc:':
+				return err + brackets[token]
+			return err
+	if tokens:
+		closing = tokens.pop()
+		if closing != brackets[token]:
+			return 'cor:' + closing # corrupted
+	else:
+		return 'inc:' + brackets[token]  # incomplete
+
+def solve():
+	total1 = 0
+	total2 = []
 
 	for line in puzzle_input:
 		tokens = list(reversed(list(line)))
 		while tokens:
 			err = parse_chunk(tokens)
-			if err and err != 'incomplete':
-				total += score[err]
+
+			if not err: continue
+
+			err_code = err[:4]
+			err_val = err[4:]
+
+			if err_code == 'cor:':
+				total1 += scores[err_val]
 				break
 
+			elif err_code == 'inc:':
+				total = 0
+				for i in err_val:
+					total *= 5
+					total += points[i]
+				total2.append(total)
+				break
 
-	return total
+	total2.sort()
 
-def solve2():
-	pass
+	return total1, total2[int(len(total2)/2)]
+
+answer1, answer2 = solve()
+
+def solve1(): return answer1
+def solve2(): return answer2
 
 print("Pt1:", solve1())
-# print("Pt2:", solve2())
+print("Pt2:", solve2())
