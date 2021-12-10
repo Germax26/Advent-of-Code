@@ -64,5 +64,5 @@ def solve2():
 	return total
 
 
-# print("Pt1:", solve1())
+print("Pt1:", solve1())
 print("Pt2:", solve2())
