@@ -10,13 +10,19 @@ puzzle_input = read_from_file("inputs/day11.txt")
 
 pm1 = [-1, 0, 1]
 
-def solve1():
+def solve():
+	answer1, answer2 = 0, 0
 
 	octopuses = puzzle_input
 
+	size = len(octopuses) * len(octopuses[0])
+
 	num_flashes = 0
 
-	for step in range(100):
+	step = 1
+	while True:
+		old_flashes = num_flashes
+
 		octopuses = [[octopus + 1 for octopus in row] for row in octopuses]
 
 		new_octopuses = octopuses.copy()
@@ -40,10 +46,17 @@ def solve1():
 
 		octopuses = new_octopuses
 
-	return num_flashes
+		if step == 100:
+			answer1 = num_flashes
+		if num_flashes - old_flashes == size:
+			answer2 = step
+			break
 
-def solve2():
-	pass
+		step += 1
 
-print("Pt1:", solve1())
-# print("Pt2:", solve2())
+	return answer1, answer2
+
+answer1, answer2 = solve()
+
+print("Pt1:", answer1)
+print("Pt2:", answer2)
